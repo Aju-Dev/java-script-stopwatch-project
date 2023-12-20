@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stop watch</title>
+    <link rel="stylesheet" href="syle.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="time">
+            <span id="hr">00</span>:<span id="min">00</span>:<span id="sec">00</span>:<span id="milli">00</span>
+        </div>
+        <br>
+    </div>
+         <div class="btn">
+            <button id="start">Start</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">Stop</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="reset">Reset</button>
+        </div>
+        <div class="box">
+            <h3><= Time waits for no one =></h3> 
+        </div> 
+
+    <script>
+        var millicount = 0;
+        var seccount = 0;
+        var mincount = 0;
+        var hrcount = 0;
+
+        var appendmilli = document.getElementById('milli');
+        var appendsec = document.getElementById('sec');
+        var appendmin = document.getElementById('min');
+        var appendhr = document.getElementById('hr');
+
+        var btn1 = document.getElementById('start');
+        var btn2 = document.getElementById('stop');
+        var btn3 = document.getElementById('reset');
+
+        function timer(){
+            millicount++;
+            if(millicount < 9){
+                appendmilli.innerHTML = '0' + millicount;
+            }
+            if(millicount > 9){
+                appendmilli.innerHTML = millicount;
+            }
+            if(millicount > 99){
+                seccount++;
+                appendsec.innerHTML = '0' + seccount;
+                millicount = 0;
+                appendmilli.innerHTML = millicount;
+            }
+            if(seccount > 9){
+                appendsec.innerHTML = seccount;
+            }
+            if(seccount > 60){
+                mincount++;
+                appendmin.innerHTML = '0' + mincount;
+                seccount = 0;
+                appendsec.innerHTML = seccount;
+            }
+            if(mincount > 9){
+                appendmin.innerHTML = mincount;
+            }
+            if(mincount > 60){
+                hrcount++;
+                appendhr.innerHTML = '0' + hrcount;
+                mincount = 0;
+                appendmin.innerHTML = mincount; 
+            }
+            if(hrcount > 9){
+                appendhr.innerHTML = hrcount;
+            }
+
+        }
+        btn1.onclick = function(){
+            interval = setInterval(timer,10);
+        }
+        btn2.onclick = function(){
+            clearInterval(interval);
+        }
+        btn3.onclick = function(){
+            clearInterval(interval);
+            appendmilli.innerHTML = '00';
+            appendsec.innerHTML = '00';
+            appendmin.innerHTML = '00';
+            appendhr.innerHTML = '00';
+        }
+    </script>
+</body>
+</html>
